@@ -4,4 +4,5 @@
 - Core Java, Spring Boot, Hibernate, Spring Data JPA, RESTful Service, Webservice and Microservice.
 - MySQL server 8.0
 - HTML5, CSS, JavaScript
-
+- Thymeleaf
+- Spring Security
