@@ -1,6 +1,8 @@
 package org.perscholas.laboratory_bookingpro.repository;
 
 import org.perscholas.laboratory_bookingpro.model.Booking;
+import org.perscholas.laboratory_bookingpro.model.LabLocation;
+import org.perscholas.laboratory_bookingpro.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +14,5 @@ import java.util.List;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     public Booking findById(long id);
-    public List<Booking> findAllByDateTime(LocalDateTime dateTime);
-}
+
+  }

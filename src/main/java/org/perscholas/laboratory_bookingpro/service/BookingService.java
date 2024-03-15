@@ -1,15 +1,15 @@
-package org.perscholas.laboratory_bookingpro.repositoryservice;
+package org.perscholas.laboratory_bookingpro.service;
 
 import org.perscholas.laboratory_bookingpro.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
-public class BookingRepositoryImpl {
+@Service
+public class BookingService {
     private final BookingRepository bookingRepository;
 
     @Autowired
-    public BookingRepositoryImpl(BookingRepository bookingRepository){
+    public BookingService(BookingRepository bookingRepository){
            this.bookingRepository = bookingRepository;
        }
 }

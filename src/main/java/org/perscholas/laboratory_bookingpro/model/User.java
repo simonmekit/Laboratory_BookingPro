@@ -1,15 +1,15 @@
 package org.perscholas.laboratory_bookingpro.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.perscholas.laboratory_bookingpro.dto.Status;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid")
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "email", unique = true)
     private String email;
@@ -29,9 +29,12 @@ public class User {
     private int age;
     @Column(name = "gender")
     private String gender;
+    @Column(name = "dob")
+    private Date dob;
     @Column(name = "affilation")
     private String affiliation;
-
+    @Column(name = "status")
+    private Status status;
 
     @OneToMany(mappedBy = "labUser", cascade = CascadeType.ALL)
     private List<Booking> bookings;
