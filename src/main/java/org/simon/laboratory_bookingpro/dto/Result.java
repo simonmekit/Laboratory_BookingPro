@@ -1,4 +1,4 @@
-package org.simon.laboratory_bookingpro.model;
+package org.simon.laboratory_bookingpro.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,6 +1,6 @@
 package org.simon.laboratory_bookingpro.repositoryservice;
 
-import org.simon.laboratory_bookingpro.model.Booking;
+import org.simon.laboratory_bookingpro.dto.Booking;
 
 import java.time.LocalDateTime;
 import java.util.List;

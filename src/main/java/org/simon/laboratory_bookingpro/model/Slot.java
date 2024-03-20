@@ -1,4 +1,4 @@
-package org.simon.laboratory_bookingpro.dto;
+package org.simon.laboratory_bookingpro.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

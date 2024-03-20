@@ -3,8 +3,7 @@ package org.simon.laboratory_bookingpro.service;
 
 import lombok.extern.log4j.Log4j2;
 //import org.modelmapper.ModelMapper;
-import org.simon.laboratory_bookingpro.dto.Status;
-import org.simon.laboratory_bookingpro.model.User;
+import org.simon.laboratory_bookingpro.dto.UserDto;
 import org.simon.laboratory_bookingpro.repository.UserRepository;
 import org.simon.laboratory_bookingpro.repositoryservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +26,19 @@ public class UserServiceImpl implements UserService {
 
 
   @Override
-  public ResponseEntity<?> createUser(User userToBeSaved) {
+  public ResponseEntity<?> createUser(UserDto userDtoToBeSaved) {
 
-    if (isUserAlreadyExist(userToBeSaved)) {
-      return ResponseEntity.badRequest().body("User with same detail already exist");
+    if (isUserAlreadyExist(userDtoToBeSaved)) {
+      return ResponseEntity.badRequest().body("UserDto with same detail already exist");
     } else {
 
-      userRepository.save(userToBeSaved);
-      return ResponseEntity.ok(userToBeSaved);
+      userRepository.save(userDtoToBeSaved);
+      return ResponseEntity.ok(userDtoToBeSaved);
     }
   }
 
   @Override
-  public List<User> getAll() {
+  public List<UserDto> getAll() {
     return new ArrayList<>(userRepository.findAll());
   }
 
@@ -48,38 +47,36 @@ public class UserServiceImpl implements UserService {
 
     if (userRepository.findById(id).isPresent()) {
 
-      User user;
+      UserDto userDto;
       try {
-        user = userRepository.findById(id).get();
+        userDto = userRepository.findById(id).get();
       } catch (NoSuchElementException noSuchElementException) {
         return ResponseEntity.notFound().build();
       }
 
-      log.info("user found with id {} {}", id, user);
-      return ResponseEntity.ok(user);
+      log.info("userDto found with id {} {}", id, userDto);
+      return ResponseEntity.ok(userDto);
 
     } else {
       return ResponseEntity.notFound().build();
     }
   }
-
   @Override
-  public ResponseEntity<?> updateUserById(long id, User userToUpdate) {
+  public ResponseEntity<?> updateUserById(long id, UserDto userDtoToUpdate) {
     ResponseEntity<?> response = getUserById(id);
 
     if (response.getBody() != null) {
-      User currentUser = (User) response.getBody();
+      UserDto currentUserDto = (UserDto) response.getBody();
       // The name, phoneNumber, countryCode should not be modified.
-      User toSave = User.builder().firstName(currentUser.getFirstName())
-              .lastName(userToUpdate.getLastName())
-              .email(userToUpdate.getEmail())
-              .phoneNumber(currentUser.getPhoneNumber())
-              .age(currentUser.getAge())
-              .gender(userToUpdate.getGender())
-              .dob(userToUpdate.getDob())
-              .status(Status.ACTIVE).build();
+      UserDto toSave = UserDto.builder().firstName(currentUserDto.getFirstName())
+              .lastName(userDtoToUpdate.getLastName())
+              .email(userDtoToUpdate.getEmail())
+              .phoneNumber(currentUserDto.getPhoneNumber())
+              .age(currentUserDto.getAge())
+              .gender(userDtoToUpdate.getGender())
+              .dob(userDtoToUpdate.getDob()).build();
 
-      toSave.setId(currentUser.getId());
+      toSave.setId(currentUserDto.getId());
       userRepository.save(toSave);
 
       return ResponseEntity.ok(toSave);
@@ -92,7 +89,7 @@ public class UserServiceImpl implements UserService {
 //  @Override
 //  public ResponseEntity<?> patchUser(long id, UserPatchRequest changes) {
 //
-//    User initialUser = (User) getUserById(id).getBody();
+//    UserDto initialUser = (UserDto) getUserById(id).getBody();
 //
 //    if (initialUser == null) {
 //      return ResponseEntity.notFound().build();
@@ -142,48 +139,33 @@ public class UserServiceImpl implements UserService {
     } else {
 
       // NOTE: WE ARE JUST UPDATING STATUS OF ENTITY.
-      User userToDelete = (User) getUserById(id).getBody();
-      userToDelete.setStatus(Status.INACTIVE);
-      userRepository.save(userToDelete);
-      return ResponseEntity.ok(userToDelete);
+      UserDto userDtoToDelete = (UserDto) getUserById(id).getBody();
+      userRepository.save(userDtoToDelete);
+      return ResponseEntity.ok(userDtoToDelete);
     }
   }
 
-  @Override
-  public ResponseEntity<?> restoreUserById(long id) {
-    if (userRepository.findById(id).isPresent()) {
-      User restoredUser = userRepository.findById(id).get();
-      if (restoredUser.getStatus() == Status.ACTIVE)
-        return ResponseEntity.badRequest().body("Already Exist");
-
-      restoredUser.setStatus(Status.ACTIVE);
-      userRepository.save(restoredUser);
-      return ResponseEntity.ok(restoredUser);
-    }
-    return ResponseEntity.badRequest().body("User not found by given id");
-  }
 
   @Override
   public ResponseEntity<?> findUserByPhone(String phoneNumber) {
-    User foundUser = userRepository.findUserByPhoneNumber(phoneNumber);
+    UserDto foundUserDto = userRepository.findUserByPhoneNumber(phoneNumber);
 
-    if (foundUser != null && foundUser.getStatus().equals(Status.ACTIVE)) {
-      log.info("Found User Phone is {} ",
-              foundUser.getPhoneNumber());
+    if (foundUserDto != null ) {
+      log.info("Found UserDto Phone is {} ",
+              foundUserDto.getPhoneNumber());
 
-      return ResponseEntity.ok(foundUser);
+      return ResponseEntity.ok(foundUserDto);
     } else {
 
-      log.info("User not found by phone {}", phoneNumber);
+      log.info("UserDto not found by phone {}", phoneNumber);
       return ResponseEntity.notFound().build();
     }
   }
 
-  private boolean isUserAlreadyExist(User userToSave) {
-    List<User> savedUserList = userRepository.findAll();
-    for (User u : savedUserList) {
-      if (u.getPhoneNumber().equals(userToSave.getPhoneNumber())
-    && u.getStatus() == Status.ACTIVE) {
+  private boolean isUserAlreadyExist(UserDto userDtoToSave) {
+    List<UserDto> savedUserListDto = userRepository.findAll();
+    for (UserDto u : savedUserListDto) {
+      if (u.getEmail().equals(userDtoToSave.getEmail())) {
         return true;
       }
     }

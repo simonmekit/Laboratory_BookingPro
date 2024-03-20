@@ -1,7 +1,5 @@
-package org.simon.laboratory_bookingpro.dto;
+package org.simon.laboratory_bookingpro.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;

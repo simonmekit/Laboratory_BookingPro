@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,17 +19,17 @@
 <div class="container">
     <h3>Laboratory Booking Web Application</h3>
     <p>Please fill the required information below to schedule your lab request: </p>
-    <form action="saveBooking" method="post">
+    <form action="#" th:action="@{/saveBooking}" th:object="${labUser}" th:method="post">
         <div class="form-group">
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName">
+                    <label for="firstName" th:text="">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" th:field="*{firstName}">
                 </div>
                 <div class="col-md-4">
                     <label for="dob">Date of Birth:</label>
-                    <input type="date" class="form-control" id="dob" name="dob">
+                    <input type="date" class="form-control" id="dob" name="dob" th:field="*{dob}">
                 </div>
             </div>
         </div>
@@ -37,11 +37,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="email" name="email" th:field="*{email}">
                 </div>
                 <div class="col-md-6">
                     <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}">
                 </div>
             </div>
         </div>

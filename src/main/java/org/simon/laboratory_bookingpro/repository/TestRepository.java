@@ -1,6 +1,6 @@
 package org.simon.laboratory_bookingpro.repository;
 
-import org.simon.laboratory_bookingpro.model.Test;
+import org.simon.laboratory_bookingpro.dto.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

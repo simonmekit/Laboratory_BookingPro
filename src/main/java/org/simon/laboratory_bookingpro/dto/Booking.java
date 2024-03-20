@@ -1,4 +1,4 @@
-package org.simon.laboratory_bookingpro.model;
+package org.simon.laboratory_bookingpro.dto;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,29 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "experiments")
-public class Experiment {
+@Table(name = "bookings")
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    private long id;
 
-    @OneToMany
-    @JoinColumn(name = "fk_sample_id")
-    private List<Sample> samples;
-
-    @OneToMany
-    @JoinColumn(name = "fk_test_id")
-    private List<Test> tests;
+    @ManyToOne
+    @JoinColumn(name = "fk_user_id")
+    private UserDto labUserDto;
 
     @ManyToOne
     @JoinColumn(name = "fk_location_id")
     private LabLocation labLocation;
+
+    private LocalDateTime dateTime;
 }

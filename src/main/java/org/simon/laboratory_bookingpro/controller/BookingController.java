@@ -2,9 +2,9 @@ package org.simon.laboratory_bookingpro.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import org.simon.laboratory_bookingpro.dto.UserDto;
 
 @Controller
 public class BookingController {
@@ -15,7 +15,7 @@ public class BookingController {
         return "createBook";
     }
     @PostMapping("/saveBooking")
-        public void saveBooking(){
-        //booking details
+        public void saveBooking(@ModelAttribute UserDto userDto, Model model){
+
     }
 }

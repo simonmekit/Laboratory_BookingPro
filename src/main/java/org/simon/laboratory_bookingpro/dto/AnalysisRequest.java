@@ -1,4 +1,4 @@
-package org.simon.laboratory_bookingpro.model;
+package org.simon.laboratory_bookingpro.dto;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -24,7 +23,7 @@ public class AnalysisRequest {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id")
-    private User labUser;
+    private UserDto labUserDto;
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "fk_sample_id")
@@ -43,7 +42,7 @@ public class AnalysisRequest {
     public String toString() {
         return "AnalysisRequest{" +
                 "id=" + id +
-                ", labUser=" + labUser +
+                ", labUserDto=" + labUserDto +
                 ", samples=" + samples +
                 ", tests=" + tests +
                 '}';

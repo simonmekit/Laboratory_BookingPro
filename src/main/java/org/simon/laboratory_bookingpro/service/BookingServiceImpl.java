@@ -1,6 +1,6 @@
 package org.simon.laboratory_bookingpro.service;
 
-import org.simon.laboratory_bookingpro.model.Booking;
+import org.simon.laboratory_bookingpro.dto.Booking;
 import org.simon.laboratory_bookingpro.repository.BookingRepository;
 import org.simon.laboratory_bookingpro.repositoryservice.BookingRepositoryService;
 import org.slf4j.Logger;
@@ -15,6 +15,7 @@ import java.util.List;
 public class BookingServiceImpl implements BookingRepositoryService {
     private final BookingRepository bookingRepository;
     private static final Logger logger = LoggerFactory.getLogger(BookingServiceImpl.class);
+
     @Autowired
     public BookingServiceImpl(BookingRepository bookingRepository){
            this.bookingRepository = bookingRepository;
@@ -71,7 +72,7 @@ public class BookingServiceImpl implements BookingRepositoryService {
     private boolean isBookingExists(Booking booking) {
         List<Booking> bookings = bookingRepository.findAll();
         for(Booking b: bookings){
-            if (b.getLabUser().equals(booking.getLabUser()) && b.getDateTime().equals(booking.getDateTime()))
+            if (b.getLabUserDto().equals(booking.getLabUserDto()) && b.getDateTime().equals(booking.getDateTime()))
                 return true;
         }
         return false;
