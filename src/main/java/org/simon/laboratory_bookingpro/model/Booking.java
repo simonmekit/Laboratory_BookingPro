@@ -27,5 +27,5 @@ public class Booking {
     @JoinColumn(name = "fk_location_id")
     private LabLocation labLocation;
 
-    private String dateTime;
+    private LocalDateTime dateTime;
 }

@@ -70,11 +70,13 @@ public class UserServiceImpl implements UserService {
     if (response.getBody() != null) {
       User currentUser = (User) response.getBody();
       // The name, phoneNumber, countryCode should not be modified.
-      User toSave = User.builder().name(currentUser.getName())
+      User toSave = User.builder().firstName(currentUser.getFirstName())
+              .lastName(userToUpdate.getLastName())
               .email(userToUpdate.getEmail())
               .phoneNumber(currentUser.getPhoneNumber())
-              .dob(userToUpdate.getDob())
+              .age(currentUser.getAge())
               .gender(userToUpdate.getGender())
+              .dob(userToUpdate.getDob())
               .status(Status.ACTIVE).build();
 
       toSave.setId(currentUser.getId());
