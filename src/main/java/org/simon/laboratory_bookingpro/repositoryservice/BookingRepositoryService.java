@@ -9,7 +9,7 @@ public interface BookingRepositoryService {
 public List<Booking> findBookingByUserId(long userId);
 public List<Booking> findBookingByLabLocation(long locationId);
 public void createBooking(Booking booking);
-public Booking findBookingByDateTime(String dateTime);
+public Booking findBookingByDateTime(LocalDateTime dateTime);
 public void deleteBookingById(long bookingId);
 public void deleteBookingByUserId(long userId);
 public void updateBookingById(long bookingId);

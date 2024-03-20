@@ -43,7 +43,7 @@ public class BookingServiceImpl implements BookingRepositoryService {
     }
 
     @Override
-    public Booking findBookingByDateTime(String dateTime) {
+    public Booking findBookingByDateTime(LocalDateTime dateTime) {
         Booking booking = bookingRepository.findBookingByDateTime(dateTime);
         return null;
     }
