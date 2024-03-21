@@ -19,7 +19,7 @@
 <div class="container">
     <h3>Laboratory Booking Web Application</h3>
     <p>Please fill the required information below to schedule your lab request: </p>
-    <form action="#" th:action="@{/saveBooking}" th:object="${labUser}" th:method="post">
+    <form th:action="@{/saveBooking}" th:object="${labUser}" th:method="post">
         <div class="form-group">
         <div class="form-group">
             <div class="row">

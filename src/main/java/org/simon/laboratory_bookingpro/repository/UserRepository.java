@@ -11,4 +11,8 @@ public interface UserRepository extends JpaRepository<UserDto,Long> {
     public UserDto findAllByIdAndEmail(int id, String email);
     public UserDto findAllByPhoneNumber(String phoneNumber);
     public UserDto findUserByPhoneNumber(String phoneNumber);
+
+    public UserDto findByEmail(String email);
+
+
 }

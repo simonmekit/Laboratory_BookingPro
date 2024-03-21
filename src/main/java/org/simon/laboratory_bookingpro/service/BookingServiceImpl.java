@@ -2,7 +2,7 @@ package org.simon.laboratory_bookingpro.service;
 
 import org.simon.laboratory_bookingpro.dto.Booking;
 import org.simon.laboratory_bookingpro.repository.BookingRepository;
-import org.simon.laboratory_bookingpro.repositoryservice.BookingRepositoryService;
+import org.simon.laboratory_bookingpro.repositoryservice.BookingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class BookingServiceImpl implements BookingRepositoryService {
+public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private static final Logger logger = LoggerFactory.getLogger(BookingServiceImpl.class);
 

@@ -1,23 +1,19 @@
 package org.simon.laboratory_bookingpro.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.simon.laboratory_bookingpro.dto.AnalysisRequest;
-import org.simon.laboratory_bookingpro.dto.Booking;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private String firstName;
@@ -37,6 +33,8 @@ public class User {
     private String affiliation;
 
     private String password;
+
+    private String matchingPassword;
 
     @Override
     public String toString() {

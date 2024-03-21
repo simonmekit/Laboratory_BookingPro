@@ -5,7 +5,7 @@ import org.simon.laboratory_bookingpro.dto.Booking;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface BookingRepositoryService {
+public interface BookingService {
 public List<Booking> findBookingByUserId(long userId);
 public List<Booking> findBookingByLabLocation(long locationId);
 public void createBooking(Booking booking);

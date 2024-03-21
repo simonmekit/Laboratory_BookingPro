@@ -4,6 +4,7 @@ package org.simon.laboratory_bookingpro.service;
 import lombok.extern.log4j.Log4j2;
 //import org.modelmapper.ModelMapper;
 import org.simon.laboratory_bookingpro.dto.UserDto;
+import org.simon.laboratory_bookingpro.model.User;
 import org.simon.laboratory_bookingpro.repository.UserRepository;
 import org.simon.laboratory_bookingpro.repositoryservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,20 +148,29 @@ public class UserServiceImpl implements UserService {
 
 
   @Override
-  public ResponseEntity<?> findUserByPhone(String phoneNumber) {
+  public UserDto findUserByPhone(String phoneNumber) {
     UserDto foundUserDto = userRepository.findUserByPhoneNumber(phoneNumber);
 
     if (foundUserDto != null ) {
       log.info("Found UserDto Phone is {} ",
               foundUserDto.getPhoneNumber());
 
-      return ResponseEntity.ok(foundUserDto);
+      return foundUserDto;
     } else {
-
       log.info("UserDto not found by phone {}", phoneNumber);
-      return ResponseEntity.notFound().build();
+      return null;
     }
   }
+ @Override
+  public UserDto findUserByEmail(String email){
+     return userRepository.findByEmail(email);
+ }
+
+ @Override
+ public UserDto findUserByEmailAndPassword(String email, String password){
+    return null; //userRepository.findByEmailAndPassword(email, password);
+ }
+
 
   private boolean isUserAlreadyExist(UserDto userDtoToSave) {
     List<UserDto> savedUserListDto = userRepository.findAll();
