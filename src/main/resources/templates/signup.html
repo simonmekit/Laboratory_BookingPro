@@ -1,15 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booking Form</title>
-  <!-- Bootstrap CSS -->
+
+  <!--=============== REMIXICONS ===============-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+  <title>Responsive navbar</title>
 </head>
-<body style="margin: 5px">
+<body>
+<!--==================== HEADER ====================-->
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="#" class="nav__logo">Logo</a>
+
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href="#" class="nav__link">Home</a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#" class="nav__link">About Us</a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#" class="nav__link">Services</a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#" class="nav__link">Featured</a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#" class="nav__link">Contact Me</a>
+        </li>
+      </ul>
+
+      <!-- Close button -->
+      <div class="nav__close" id="nav-close">
+        <i class="ri-close-line"></i>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <!-- Search button -->
+      <i class="ri-search-line nav__search" id="search-btn"></i>
+
+      <!-- Login button -->
+      <i class="ri-user-line nav__login" id="login-btn"></i>
+
+      <!-- Toggle button -->
+      <div class="nav__toggle" id="nav-toggle">
+        <i class="ri-menu-line"></i>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!--==================== SEARCH ====================-->
+<div class="search" id="search">
+  <form action="" class="search__form">
+    <i class="ri-search-line search__icon"></i>
+    <input type="search" placeholder="What are you looking for?" class="search__input">
+  </form>
+
+  <i class="ri-close-line search__close" id="search-close"></i>
+</div>
+
 <h2>Sign Up</h2>
-<div class="container" style="background-color: #bdc5ce">
+<div class="container2">
   <form th:action="@{/createUser}" th:object="${userForm}" method="post">
     <div class="form-group">
       <div class="row">
@@ -26,10 +90,6 @@
     <div class="form-group">
       <div class="row">
         <div class="col-md-2">
-          <label for="age">Age:</label>
-          <input type="number" class="form-control" id="age" name="age" required th:field="*{age}">
-        </div>
-        <div class="col-md-2">
           <label for="gender">Gender:</label>
           <br>
           <select id="gender" name="gender" th:field="*{gender}">
@@ -39,14 +99,14 @@
           </select>
 
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="dob">Date of Birth:</label>
           <input type="date" class="form-control" id="dob" name="dob" required th:field="*{dob}">
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <label for="affiliation">Affiliation:</label>
           <br>
-      <!-- Read data from JSON file-->
+          <!-- Read data from JSON file-->
           <select id="affiliation" name="affiliation" th:field="*{affiliation}">
             <option value="selectAffiliation">Select Affiliation</option>
             <option value="MayoClinic">Mayo Clinic</option>
@@ -81,10 +141,15 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
-<p th:text="${message}"></p>
+<!--<p th:text="${message}"></p>-->
 
-<!-- Bootstrap JS (optional, if you need JavaScript) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!--<script src="../scripts/register.js"></script>-->
+
+<!--==================== MAIN ====================-->
+<main class="main" style="position: static; margin-top: 30px">
+  <img th:src="@{/images/bg-image.png}" alt="image" class="main__bg">
+</main>
+
+<!--=============== MAIN JS ===============-->
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>

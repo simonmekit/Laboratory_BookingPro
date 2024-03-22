@@ -73,7 +73,6 @@ public class UserServiceImpl implements UserService {
               .lastName(userDtoToUpdate.getLastName())
               .email(userDtoToUpdate.getEmail())
               .phoneNumber(currentUserDto.getPhoneNumber())
-              .age(currentUserDto.getAge())
               .gender(userDtoToUpdate.getGender())
               .dob(userDtoToUpdate.getDob()).build();
 

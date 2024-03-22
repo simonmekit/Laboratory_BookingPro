@@ -1,6 +1,7 @@
 package org.simon.laboratory_bookingpro.controller;
 
 import org.simon.laboratory_bookingpro.dto.UserDto;
+import org.simon.laboratory_bookingpro.model.User;
 import org.simon.laboratory_bookingpro.repositoryservice.UserService;
 import org.simon.laboratory_bookingpro.service.BookingServiceImpl;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ public class RegistrationController {
     @GetMapping("/register")
     public String register(Model model){
     model.addAttribute("userForm", new UserDto());
+   // model.addAttribute("userLogin", new UserDto());
         return "signup";
     }
 
@@ -43,7 +45,8 @@ public class RegistrationController {
             logger.error(message);
         }
         model.addAttribute("message", message);
-        model.addAttribute("userForm", new UserDto());
-        return "signup";
+        model.addAttribute("userLogin", new UserDto());
+        return "index";
     }
+
 }

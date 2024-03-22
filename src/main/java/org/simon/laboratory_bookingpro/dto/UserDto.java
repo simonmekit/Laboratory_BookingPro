@@ -27,8 +27,6 @@ public class UserDto {
     private String email;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-    @Column(name = "age")
-    private int age;
     @Column(name = "gender")
     private String gender;
     @Column(name = "dob")
@@ -56,7 +54,6 @@ public class UserDto {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", dob=" + dob.toString() +
                 ", affiliation='" + affiliation + '\'' +

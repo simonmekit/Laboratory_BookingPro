@@ -24,8 +24,6 @@ public class User {
 
     private String phoneNumber;
 
-    private int age;
-
     private String gender;
 
     private LocalDate dob;
@@ -44,7 +42,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", dob=" + dob.toString() +
                 ", affiliation='" + affiliation + '\'' +
