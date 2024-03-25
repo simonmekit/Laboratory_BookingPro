@@ -25,4 +25,6 @@ public interface UserService {
      UserDto findUserByEmail(String email);
 
     public UserDto findUserByEmailAndPassword(String email, String password);
+
+    public void save(UserDto userDto);
 }

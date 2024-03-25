@@ -71,9 +71,12 @@ public class UserServiceImpl implements UserService {
       // The name, phoneNumber, countryCode should not be modified.
       UserDto toSave = UserDto.builder().firstName(currentUserDto.getFirstName())
               .lastName(userDtoToUpdate.getLastName())
+              .gender(userDtoToUpdate.getGender())
+              .affiliation(userDtoToUpdate.getAffiliation())
               .email(userDtoToUpdate.getEmail())
               .phoneNumber(currentUserDto.getPhoneNumber())
-              .gender(userDtoToUpdate.getGender())
+              .password(currentUserDto.getPassword())
+              .matchingPassword(currentUserDto.getMatchingPassword())
               .dob(userDtoToUpdate.getDob()).build();
 
       toSave.setId(currentUserDto.getId());
@@ -138,10 +141,9 @@ public class UserServiceImpl implements UserService {
       return ResponseEntity.notFound().build();
     } else {
 
-      // NOTE: WE ARE JUST UPDATING STATUS OF ENTITY.
-      UserDto userDtoToDelete = (UserDto) getUserById(id).getBody();
-      userRepository.save(userDtoToDelete);
-      return ResponseEntity.ok(userDtoToDelete);
+      // NOTE: Delete the profile using delete method of Jpa repository.
+      userRepository.deleteById(id);
+      return ResponseEntity.ok(userRepository.findById(id));
     }
   }
 
@@ -169,6 +171,14 @@ public class UserServiceImpl implements UserService {
  public UserDto findUserByEmailAndPassword(String email, String password){
     return null; //userRepository.findByEmailAndPassword(email, password);
  }
+
+  /**
+   * @param userDto
+   */
+  @Override
+  public void save(UserDto userDto) {
+
+  }
 
 
   private boolean isUserAlreadyExist(UserDto userDtoToSave) {

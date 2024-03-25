@@ -8,13 +8,13 @@
 		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.perscholas</groupId>
+	<groupId>org.simon</groupId>
 	<artifactId>Laboratory_BookingPro</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Laboratory_BookingPro</name>
 	<description>Laboratory_BookingPro</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>18</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

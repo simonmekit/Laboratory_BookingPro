@@ -11,6 +11,17 @@
   <link rel="stylesheet" th:href="@{/css/styles.css}">
 
   <title>Responsive navbar</title>
+
+  <style>
+    /* Add your custom styles here */
+    .sub-menu {
+      display: none;
+    }
+    .nav__item.active .sub-menu {
+      display: block;
+    }
+  </style>
+
 </head>
 <body>
 <!--==================== HEADER ====================-->
@@ -21,7 +32,7 @@
     <div class="nav__menu" id="nav-menu">
       <ul class="nav__list">
         <li class="nav__item">
-          <a href="#" class="nav__link">Home</a>
+          <a th:href="@{/}" class="nav__link">Home</a>
         </li>
 
         <li class="nav__item">
@@ -30,10 +41,14 @@
 
         <li class="nav__item">
           <a href="#" class="nav__link">Services</a>
-        </li>
+          <!-- Submenu -->
+          <ul class="sub-menu">
+            <li><a th:href="@{/register}">Signup</a></li>
+            <li><a th:href="@{/profile}">Update Profile</a></li>
+            <li><a th:href="@{/booking}">Book Appointment</a></li>
 
-        <li class="nav__item">
-          <a href="#" class="nav__link">Featured</a>
+          </ul>
+
         </li>
 
         <li class="nav__item">
@@ -151,5 +166,16 @@
 
 <!--=============== MAIN JS ===============-->
 <script th:src="@{/js/main.js}"></script>
+
+
+<script>
+  const servicesMenu = document.querySelector('.nav__item:nth-child(3)');
+
+  servicesMenu.addEventListener('click', function() {
+    servicesMenu.classList.toggle('active');
+  });
+</script>
+
+
 </body>
 </html>
