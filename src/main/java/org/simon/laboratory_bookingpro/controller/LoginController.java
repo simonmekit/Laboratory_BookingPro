@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
-  /**  private final UserService userService;
+    private final UserService userService;
 
     @Autowired
     public LoginController(UserService userService){
@@ -24,7 +24,7 @@ public class LoginController {
     @GetMapping("/login")
     public String userLogin(Model model){
     model.addAttribute("userLogin", new User());
-        return "index";
+        return "login";
     }
     @PostMapping("/user_login")
     public String login(@ModelAttribute User currentUser, Model model){
@@ -38,5 +38,5 @@ public class LoginController {
     }
     else
         return "login";
-    }*/
+    }
 }
