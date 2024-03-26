@@ -33,12 +33,6 @@ public class UserController {
         return "profile";
     }
 
-//    @PostMapping("find_profile")
-//    public String updateProfile(@ModelAttribute("userProfile") UserDto currentUser, Model model){
-//        UserDto userDto = userService.findUserByEmail(currentUser.getEmail());
-//        model.addAttribute("userProfile", userDto);
-//        return "update_profile";
-//    }
 
     @PostMapping("/profile/update")
     public String updateProfile(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("gender") String gender, @RequestParam("dob") LocalDate dateOfBirth, @RequestParam("affiliation") String affiliation, @RequestParam("password") String password, @RequestParam("matchingPassword") String matchingPassword, @RequestParam("action") String action) {
@@ -61,7 +55,7 @@ public class UserController {
            }
        }
        else {
-           System.out.println(new ProfileNotFoundException("Invalid User email: " + email).getMessage());
+           throw new ProfileNotFoundException("Invalid User email: " + email);
        }
         return "redirect:/home";
     }

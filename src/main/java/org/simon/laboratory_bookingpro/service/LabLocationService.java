@@ -17,11 +17,19 @@ public class LabLocationService {
 
     // Create operation
     public LabLocation createLabLocation(LabLocation labLocation) {
-        return labLocationRepository.save(labLocation);
+        try {
+            return labLocationRepository.save(labLocation);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public LabLocation getLabLocationByCode(int code){
-        return labLocationRepository.findLabLocationByLocationCode(code);
+        try {
+            return labLocationRepository.findLabLocationByLocationCode(code);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // Read operation

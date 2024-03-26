@@ -6,6 +6,7 @@ import org.simon.laboratory_bookingpro.dto.Booking;
 import org.simon.laboratory_bookingpro.dto.BookingDto;
 import org.simon.laboratory_bookingpro.dto.LabLocation;
 import org.simon.laboratory_bookingpro.dto.UserDto;
+import org.simon.laboratory_bookingpro.exception.RepositoryException;
 import org.simon.laboratory_bookingpro.repository.BookingRepository;
 import org.simon.laboratory_bookingpro.repositoryservice.BookingService;
 import org.simon.laboratory_bookingpro.repositoryservice.UserService;
@@ -60,19 +61,24 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public void createBooking(BookingDto bookingDto, int labLocationCode){
 
-        UserDto labUser = userService.findUserByEmail("admin@admin.com");
-        LabLocation labLocation = labLocationService.getLabLocationByCode(labLocationCode);
-        /** Using model mapper helps to avoid extra coding
-         * @param userDTO
-         */
+        try {
+            UserDto labUser = userService.findUserByEmail("admin@admin.com");
+            LabLocation labLocation = labLocationService.getLabLocationByCode(labLocationCode);
+            /** Using model mapper helps to avoid extra coding
+             * @param userDTO
+             */
 
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        Booking booking1 = modelMapper.map(bookingDto, Booking.class);
-        booking1.setLabUserDto(labUser);
-        booking1.setLabLocation(labLocation);
+            ModelMapper modelMapper = new ModelMapper();
+            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+            Booking booking1 = modelMapper.map(bookingDto, Booking.class);
+            booking1.setLabUserDto(labUser);
+            booking1.setLabLocation(labLocation);
 
-        bookingRepository.save(booking1);
+            bookingRepository.save(booking1);
+        }
+        catch (Exception e) {
+            throw new RepositoryException("Invalid booking details.");
+        }
 
     }
     @Override

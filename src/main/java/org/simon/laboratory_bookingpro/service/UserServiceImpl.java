@@ -4,6 +4,7 @@ package org.simon.laboratory_bookingpro.service;
 import lombok.extern.log4j.Log4j2;
 //import org.modelmapper.ModelMapper;
 import org.simon.laboratory_bookingpro.dto.UserDto;
+import org.simon.laboratory_bookingpro.exception.RepositoryException;
 import org.simon.laboratory_bookingpro.model.User;
 import org.simon.laboratory_bookingpro.repository.UserRepository;
 import org.simon.laboratory_bookingpro.repositoryservice.UserService;
@@ -24,8 +25,6 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private UserRepository userRepository;
 
-
-
   @Override
   public ResponseEntity<?> createUser(UserDto userDtoToBeSaved) {
 
@@ -33,7 +32,12 @@ public class UserServiceImpl implements UserService {
       return ResponseEntity.badRequest().body("UserDto with same detail already exist");
     } else {
 
-      userRepository.save(userDtoToBeSaved);
+      try {
+        userRepository.save(userDtoToBeSaved);
+      }
+      catch (Exception e) {
+        throw new RepositoryException("Invalid signup details.");
+      }
       return ResponseEntity.ok(userDtoToBeSaved);
     }
   }
@@ -51,7 +55,8 @@ public class UserServiceImpl implements UserService {
       UserDto userDto;
       try {
         userDto = userRepository.findById(id).get();
-      } catch (NoSuchElementException noSuchElementException) {
+      }
+      catch (NoSuchElementException noSuchElementException) {
         return ResponseEntity.notFound().build();
       }
 
@@ -67,22 +72,28 @@ public class UserServiceImpl implements UserService {
     ResponseEntity<?> response = getUserById(id);
 
     if (response.getBody() != null) {
-      UserDto currentUserDto = (UserDto) response.getBody();
-      // The name, phoneNumber, countryCode should not be modified.
-      UserDto toSave = UserDto.builder().firstName(currentUserDto.getFirstName())
-              .lastName(userDtoToUpdate.getLastName())
-              .gender(userDtoToUpdate.getGender())
-              .affiliation(userDtoToUpdate.getAffiliation())
-              .email(userDtoToUpdate.getEmail())
-              .phoneNumber(currentUserDto.getPhoneNumber())
-              .password(currentUserDto.getPassword())
-              .matchingPassword(currentUserDto.getMatchingPassword())
-              .dob(userDtoToUpdate.getDob()).build();
 
-      toSave.setId(currentUserDto.getId());
-      userRepository.save(toSave);
+      try {
+        UserDto currentUserDto = (UserDto) response.getBody();
+        // The name, phoneNumber, countryCode should not be modified.
+        UserDto toSave = UserDto.builder().firstName(currentUserDto.getFirstName())
+                .lastName(userDtoToUpdate.getLastName())
+                .gender(userDtoToUpdate.getGender())
+                .affiliation(userDtoToUpdate.getAffiliation())
+                .email(userDtoToUpdate.getEmail())
+                .phoneNumber(currentUserDto.getPhoneNumber())
+                .password(currentUserDto.getPassword())
+                .matchingPassword(currentUserDto.getMatchingPassword())
+                .dob(userDtoToUpdate.getDob()).build();
 
-      return ResponseEntity.ok(toSave);
+        toSave.setId(currentUserDto.getId());
+        userRepository.save(toSave);
+
+        return ResponseEntity.ok(toSave);
+      }
+      catch (Exception e) {
+        throw new RuntimeException(e);
+      }
 
     } else {
       return ResponseEntity.notFound().build();
@@ -91,13 +102,17 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public ResponseEntity<?> deleteUserById(long id) {
-    if (userRepository.findById(id).isEmpty()) {
-      return ResponseEntity.notFound().build();
-    } else {
+    try {
+      if (userRepository.findById(id).isEmpty()) {
+        return ResponseEntity.notFound().build();
+      } else {
 
-      // NOTE: Delete the profile using delete method of Jpa repository.
-      userRepository.deleteById(id);
-      return ResponseEntity.ok(userRepository.findById(id));
+        // NOTE: Delete the profile using delete method of Jpa repository.
+        userRepository.deleteById(id);
+        return ResponseEntity.ok(userRepository.findById(id));
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 

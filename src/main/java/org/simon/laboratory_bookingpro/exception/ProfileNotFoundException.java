@@ -8,9 +8,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class ProfileNotFoundException extends java.lang.IllegalArgumentException {
 
-    private final String message;
-
-    public ProfileNotFoundException(String message){
-        this.message = message;
+     public ProfileNotFoundException(String message){
+        super(message);
     }
 }
