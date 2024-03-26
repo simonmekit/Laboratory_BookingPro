@@ -46,6 +46,14 @@ public class UserDto {
     @OneToMany(mappedBy = "labUserDto", cascade = CascadeType.ALL)
     private List<AnalysisRequest> analysisRequests;
 
+    public UserDto(String firstName, String lastName, String email, String phoneNumber, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +

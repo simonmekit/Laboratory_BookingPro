@@ -63,7 +63,7 @@ public class UserController {
        else {
            System.out.println(new ProfileNotFoundException("Invalid User email: " + email).getMessage());
        }
-        return "redirect:/profile";
+        return "redirect:/home";
     }
 
 }

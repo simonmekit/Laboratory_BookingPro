@@ -89,52 +89,6 @@ public class UserServiceImpl implements UserService {
     }
   }
 
-//  @Override
-//  public ResponseEntity<?> patchUser(long id, UserPatchRequest changes) {
-//
-//    UserDto initialUser = (UserDto) getUserById(id).getBody();
-//
-//    if (initialUser == null) {
-//      return ResponseEntity.notFound().build();
-//    }
-//
-//    if (changes.getName() != null) {
-//      initialUser.setName(changes.getName());
-//    }
-//
-//    if (changes.getEmailAddress() != null) {
-//      initialUser.setEmailAddress(changes.getEmailAddress());
-//    }
-//
-//    if (changes.getProblems() != null) {
-//      initialUser.setProblems(changes.getProblems());
-//    }
-//
-//    if (changes.getDob() != null) {
-//      initialUser.setDob(changes.getDob());
-//    }
-//
-//    if (changes.getGender() != null) {
-//      initialUser.setGender(changes.getGender());
-//    }
-//
-//    if (changes.getMedicalHistory() != null) {
-//      initialUser.setMedicalHistory(changes.getMedicalHistory());
-//    }
-//
-//    if (changes.getBloodGroup() != null) {
-//      initialUser.setBloodGroup(changes.getBloodGroup());
-//    }
-//
-//    if (changes.getWeight() >= 10 && changes.getWeight() <= 150) {
-//      initialUser.setWeight(changes.getWeight());
-//    }
-//
-//    userRepository.save(initialUser);
-//
-//    return ResponseEntity.ok(initialUser);
-//  }
-
   @Override
   public ResponseEntity<?> deleteUserById(long id) {
     if (userRepository.findById(id).isEmpty()) {

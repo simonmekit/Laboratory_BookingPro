@@ -6,6 +6,14 @@
     <title>Booking Form</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+
     <style>
 
         #findUser, #submitBooking{
@@ -13,29 +21,73 @@
             justify-content: flex-end;
             margin-right: 0px;
         }
+
+        .sub-menu {
+            display: none;
+        }
+        .nav__item.active .sub-menu {
+            display: block;
+        }
+
     </style>
+
+
+
 </head>
 <body style="margin: 10px; background-color: #d6d9e1">
+<!--==================== HEADER ====================-->
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="#" class="nav__logo">Logo</a>
 
-<div class="container">
-    <form th:action="@{/findUser}" th:object="${labUser}" th:method="post">
-        <div class="form-group">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" th:field="*{email}">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="phoneNumber">Phone Number:</label>
-                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}">
-                    </div>
-                </div>
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a th:href="@{/home}" class="nav__link">Home</a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link">About Us</a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Services</a>
+                    <!-- Submenu -->
+                    <ul class="sub-menu">
+                        <li><a th:href="@{/register}">Signup</a></li>
+                        <li><a th:href="@{/profile}">Update Profile</a></li>
+                        <li><a th:href="@{/booking}">Book Appointment</a></li>
+
+                    </ul>
+
+                </li>
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Contact Me</a>
+                </li>
+            </ul>
+
+            <!-- Close button -->
+            <div class="nav__close" id="nav-close">
+                <i class="ri-close-line"></i>
             </div>
-            <button type="submit" id="findUser" name="findUser" class="btn btn-primary" >Find</button>
         </div>
-    </form>
-</div>
+
+        <div class="nav__actions">
+            <!-- Search button -->
+            <i class="ri-search-line nav__search" id="search-btn"></i>
+
+            <!-- Login button -->
+            <i class="ri-user-line nav__login" id="login-btn"></i>
+
+            <!-- Toggle button -->
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
+    </nav>
+</header>
+
 <div class="container">
     <h3>Laboratory Booking Web Application</h3>
     <p>Please fill the required information below to schedule your lab request: </p>
@@ -44,40 +96,19 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName">
+                    <label for="description">Description:</label>
+                    <input type="text" class="form-control" id="description" name="description" th:field="*{description}">
                 </div>
+                <div class="col-md-5">
+                    <label for="labLocationCode">Lav Location Code:</label>
+                    <input type="number" class="form-control" id="labLocationCode" name="labLocationCode" th:field="*{labLocationCode}">
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
                 <div class="col-md-4">
-                    <label for="dob">Date of Birth:</label>
-                    <input type="date" class="form-control" id="dob" name="dob" >
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="email4book">Email:</label>
-                    <input type="email" class="form-control" id="email4book" name="email" >
-                </div>
-                <div class="col-md-6">
-                    <label for="phoneNumber4book">Phone Number:</label>
-                    <input type="text" class="form-control" id="phoneNumber4book" name="phoneNumber" >
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="labLocation">Lab Location:</label>
-                    <select id="labLocation" name="labLocation" th:field="*{labLocation}" required>
-                        <option value="DC">DC</option>
-                        <option value="MD">MD</option>
-                        <option value="VA">VA</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
                     <label for="dateTime">Date and Time:</label>
                     <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" th:field="*{dateTime}" required>
                 </div>
@@ -90,5 +121,19 @@
 
 <!-- Bootstrap JS (optional, if you need JavaScript) -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!--=============== MAIN JS ===============-->
+<script th:src="@{/js/main.js}"></script>
+
+<script>
+    const servicesMenu = document.querySelector('.nav__item:nth-child(3)');
+
+    servicesMenu.addEventListener('click', function() {
+        servicesMenu.classList.toggle('active');
+    });
+</script>
+
+
 </body>
 </html>

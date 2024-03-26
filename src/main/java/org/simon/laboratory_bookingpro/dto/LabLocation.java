@@ -21,9 +21,12 @@ public class LabLocation {
 
     private String name;
 
-    private String description;
+    private int locationCode;
 
-    private int capacity;
+    public LabLocation(String name, int locationCode){
+        this.name = name;
+        this.locationCode = locationCode;
+    }
 
     @OneToMany(mappedBy = "labLocation")
     private List<Booking> bookings;
