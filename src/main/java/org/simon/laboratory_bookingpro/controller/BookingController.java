@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class BookingController {
 
@@ -52,6 +54,11 @@ public class BookingController {
         return "index";
     }
 
-
+    @GetMapping("/viewBookings")
+    public String getBookings(Model model){
+        List<Booking> bookings = bookingService.findAll();
+        model.addAttribute("bookings", bookings);
+        return "viewBookings";
+    }
 
     }

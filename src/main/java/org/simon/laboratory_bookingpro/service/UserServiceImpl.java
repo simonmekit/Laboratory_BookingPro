@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 //import org.modelmapper.ModelMapper;
 import org.simon.laboratory_bookingpro.dto.UserDto;
 import org.simon.laboratory_bookingpro.exception.RepositoryException;
-import org.simon.laboratory_bookingpro.model.User;
 import org.simon.laboratory_bookingpro.repository.UserRepository;
 import org.simon.laboratory_bookingpro.repositoryservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ResponseEntity<?> getUserById(long id) {
+  public ResponseEntity<Object> getUserById(long id) {
 
     if (userRepository.findById(id).isPresent()) {
 
@@ -66,6 +65,22 @@ public class UserServiceImpl implements UserService {
     } else {
       return ResponseEntity.notFound().build();
     }
+  }
+  @Override
+  public UserDto getUserByUserId(long id) {
+
+    UserDto userDto;
+
+    if (userRepository.findById(id).isPresent()) {
+      try {
+        userDto = userRepository.findById(id).get();
+      }
+      catch (NoSuchElementException noSuchElementException) {
+        throw new RuntimeException(noSuchElementException);
+      }
+      return userDto;
+    }
+    return null;
   }
   @Override
   public ResponseEntity<?> updateUserById(long id, UserDto userDtoToUpdate) {

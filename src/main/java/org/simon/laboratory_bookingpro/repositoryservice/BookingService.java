@@ -16,5 +16,5 @@ public void deleteBookingById(long bookingId);
 public void deleteBookingByUserId(long userId);
 public void updateBookingById(long bookingId);
 public void updateBookingByUserId(long userId);
-
+public List<Booking> findAll();
 }

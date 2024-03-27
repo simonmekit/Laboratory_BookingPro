@@ -1,7 +1,12 @@
 package org.simon.laboratory_bookingpro.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NamedQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.simon.laboratory_bookingpro.LaboratoryBookingProApplication;
 import org.simon.laboratory_bookingpro.dto.Booking;
 import org.simon.laboratory_bookingpro.dto.BookingDto;
 import org.simon.laboratory_bookingpro.dto.LabLocation;
@@ -13,6 +18,7 @@ import org.simon.laboratory_bookingpro.repositoryservice.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,27 +26,52 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final UserService userService;
-
     private final LabLocationService labLocationService;
+    //private final SessionFactory sessionFactory;
+    private final EntityManager entityManager;
+
     private static final Logger logger = LoggerFactory.getLogger(BookingServiceImpl.class);
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepository, UserService userService, LabLocationService labLocationService){
+    public BookingServiceImpl(BookingRepository bookingRepository,
+                              UserService userService, LabLocationService labLocationService, EntityManager entityManager){
            this.bookingRepository = bookingRepository;
         this.userService = userService;
         this.labLocationService = labLocationService;
+
+        this.entityManager = entityManager;
     }
 
     @Override
     public List<Booking> findBookingByUserId(long userId) {
+        try  {
+            Session session = entityManager.unwrap(Session.class);
+            UserDto userDto = userService.getUserByUserId(userId);
+            List<Booking> bookings;
 
-        return bookingRepository.findAllById(userId);
+            try {
+                if (userDto != null) {
+                   // String query = "FROM Booking bk where bk.labUserDto =: labUser";
+
+                    //return session.createQuery(query, Booking.class).setParameter("labUser", userDto).getResultList();
+                    //bookings = bookingRepository.findAllById(userId);
+                    bookings = userDto.getBookings();
+                    return bookings;
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        throw new RuntimeException("Booking information not found");
     }
 
-    @Override
+      @Override
     public List<Booking> findBookingByLabLocation(long locationId) {
         return null;
     }
@@ -89,7 +120,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void deleteBookingById(long bookingId) {
-
+    bookingRepository.deleteById(bookingId);
     }
 
     @Override
@@ -106,6 +137,15 @@ public class BookingServiceImpl implements BookingService {
     public void updateBookingByUserId(long userId) {
 
     }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<Booking> findAll() {
+        return bookingRepository.findAll();
+    }
+
 
     private boolean isBookingExists(Booking booking) {
        if(booking != null) {

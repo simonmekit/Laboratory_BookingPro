@@ -1,7 +1,6 @@
 package org.simon.laboratory_bookingpro.repositoryservice;
 
 import org.simon.laboratory_bookingpro.dto.UserDto;
-import org.simon.laboratory_bookingpro.model.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -12,7 +11,8 @@ public interface UserService {
 
   List<UserDto> getAll();
 
-    ResponseEntity<?> getUserById(long id);
+    ResponseEntity<Object> getUserById(long id);
+    UserDto getUserByUserId(long id);
 
     ResponseEntity<?> updateUserById(long id, UserDto userDtoToUpdate);
 
