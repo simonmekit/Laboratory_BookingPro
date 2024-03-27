@@ -17,7 +17,7 @@ This project is a Laboratory Booking System built using Spring Boot, Hibernate, 
 
 ## Project Structure
 - **aspect:** Logging request/response results to a file.
-- **configuration:** Project-related configurations.
+- **configuration:** Project-related configurations and Security, Hashing function
 - **controller:** Controllers for handling HTTP requests.
 - **dto:** Data transfer objects.
 - **repository:** Database operation-related classes.

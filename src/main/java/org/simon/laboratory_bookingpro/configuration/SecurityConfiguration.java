@@ -4,12 +4,12 @@ import org.simon.laboratory_bookingpro.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.web.SecurityFilterChain;
-//import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * SecurityConfiguration class completely refactored
@@ -21,8 +21,8 @@ import org.springframework.context.annotation.Configuration;
 //@EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Autowired
-    private UserServiceImpl userDetailsService;
+  //  @Autowired
+  //  private UserServiceImpl userDetailsService;
 /**
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -31,7 +31,7 @@ public class SecurityConfiguration {
         auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
         return auth;
     }
-
+*/
     //beans
     //bcrypt bean definition
     @Bean
@@ -39,7 +39,7 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder(11);
     }
 
-
+/**
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
