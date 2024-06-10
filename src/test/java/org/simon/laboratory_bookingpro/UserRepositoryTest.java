@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.simon.laboratory_bookingpro.dto.UserDto;
 import org.simon.laboratory_bookingpro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@DataJpaTest
+@SpringBootTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+
 public class UserRepositoryTest {
 
     @Autowired

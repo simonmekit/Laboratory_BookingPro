@@ -45,9 +45,7 @@ public class LaboratoryBookingProApplication implements CommandLineRunner {
 	private void initUsers()
 	{
 		//Login 'admin@admin.com'
-		//Password 'test'
-//		userRepository.save(new UserDto("Jack", "Smith", "admin@admin.com", "998-098-0987",
-//				"$2a$11$DZfZLO720bZby.1QWCu81.gg2BUYCJC7PSsjEUMho.ZaVUVC1h9ZC"));
+		//Password 'admin'
 
 		userRepository.save(new UserDto("Jack", "Smith", "admin@admin.com", "998-098-0987", "admin"));
 

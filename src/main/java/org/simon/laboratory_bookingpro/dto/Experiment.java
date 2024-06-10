@@ -8,6 +8,10 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Model class to store information about Experiments made on user samples
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

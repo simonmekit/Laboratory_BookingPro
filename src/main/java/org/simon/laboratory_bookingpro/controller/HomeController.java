@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
+/**
+ * Controller for accessing home page.
+ * End points - /home, /
+ */
 @Controller
 public class HomeController {
 
@@ -28,33 +31,7 @@ public class HomeController {
         return "redirect:/login";
     }
 
-//    @PostMapping("/user_login")
-//    public String login(@ModelAttribute User currentUser, Model model){
-//        model.addAttribute("userLogin", new User());
-//        String message = null;
-//        UserDto user = userService.findUserByEmail(currentUser.getEmail());
-//
-//        if (user != null){
-//            if (user.getPassword().equals(currentUser.getPassword())) {
-//                message = "Welcome!";
-//                model.addAttribute("loginMessage", message);
-//                return "index";
-//            }
-//
-//            else{
-//                 message = "Invalid username or password!";
-//                model.addAttribute("loginMessage", message);
-//                 return "index";
-//            }
-//        }
-//
-//        else {
-//         message = "User name doesn't exist!";
-//            model.addAttribute("loginMessage", message);
-//         return "index";
-//        }
-//
-//    }
+
 
     @GetMapping("/home")
     public String displayHome(Model model){

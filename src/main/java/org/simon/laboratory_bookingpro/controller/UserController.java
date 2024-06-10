@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
+/**
+ * User controller class for CRUD operations
+ * Create, Access, update or delete user profile
+ *
+ */
 @Controller
 public class UserController {
 

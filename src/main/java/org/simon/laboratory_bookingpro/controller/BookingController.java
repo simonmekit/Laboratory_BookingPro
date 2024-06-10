@@ -20,6 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+/**
+ * Controller to manage Booking service business operations.
+ * parameters: booking
+ * operations included - CURD
+ */
+
 @Controller
 public class BookingController {
 
@@ -45,7 +51,6 @@ public class BookingController {
     @PostMapping("/saveBooking")
     public String saveBooking(@ModelAttribute("booking") BookingDto bookingDto) {
 
-      //  System.out.println(booking.toString());
 
         bookingService.createBooking(bookingDto, bookingDto.getLabLocationCode());
 //            String message = null;

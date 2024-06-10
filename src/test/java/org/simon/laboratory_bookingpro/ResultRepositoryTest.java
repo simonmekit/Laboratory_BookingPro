@@ -6,11 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.simon.laboratory_bookingpro.dto.Result;
 import org.simon.laboratory_bookingpro.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@DataJpaTest
+@SpringBootTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+
 public class ResultRepositoryTest {
 
     @Autowired

@@ -13,6 +13,7 @@ import org.simon.laboratory_bookingpro.dto.LabLocation;
 import org.simon.laboratory_bookingpro.dto.UserDto;
 import org.simon.laboratory_bookingpro.exception.RepositoryException;
 import org.simon.laboratory_bookingpro.repository.BookingRepository;
+import org.simon.laboratory_bookingpro.repository.LocationRepository;
 import org.simon.laboratory_bookingpro.repositoryservice.BookingService;
 import org.simon.laboratory_bookingpro.repositoryservice.UserService;
 import org.slf4j.Logger;
@@ -71,9 +72,10 @@ public class BookingServiceImpl implements BookingService {
         throw new RuntimeException("Booking information not found");
     }
 
-      @Override
-    public List<Booking> findBookingByLabLocation(long locationId) {
-        return null;
+
+    public List<Booking> findBookingByLabLocation(int locationCode) {
+        LabLocation location = labLocationService.getLabLocationByCode(locationCode);
+        return bookingRepository.findBookingByLabLocation(location);
     }
 
     @Override
@@ -144,6 +146,15 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> findAll() {
         return bookingRepository.findAll();
+    }
+
+    /**
+     * @param description
+     * @return
+     */
+    @Override
+    public Booking findBookingByDescription(String description) {
+        return bookingRepository.findBookingByDescription(description);
     }
 
 

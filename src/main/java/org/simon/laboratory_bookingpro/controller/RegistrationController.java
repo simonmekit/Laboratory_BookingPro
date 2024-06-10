@@ -20,7 +20,7 @@ public class RegistrationController {
     private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(BookingServiceImpl.class);
 
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
 
 

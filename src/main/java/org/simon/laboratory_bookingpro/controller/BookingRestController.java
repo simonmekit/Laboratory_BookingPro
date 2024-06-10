@@ -1,5 +1,7 @@
 package org.simon.laboratory_bookingpro.controller;
 
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
 import org.simon.laboratory_bookingpro.dto.Booking;
 import org.simon.laboratory_bookingpro.service.BookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Rest controller for crud operation Booking model class.
+ * parameters: ID of the specific booking
+ */
 @RestController
 @RequestMapping("/booking_api")
 public class BookingRestController {
 
     private final BookingServiceImpl bookingService;
+
 
     @Autowired
     public BookingRestController(BookingServiceImpl bookingService) {
@@ -33,4 +40,7 @@ public class BookingRestController {
     public List<Booking> getAllBookings(){
         return (List<Booking>) bookingService.findAll();
     }
+
+
+
 }

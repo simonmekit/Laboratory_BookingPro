@@ -9,6 +9,13 @@ import lombok.Setter;
 
 import java.util.Set;
 
+
+/**
+ * Model class store data about Analysis Result Entity.
+ * Analysis result data is filled by the laboratory technician.
+ * Users can access their own analysis information stored in the database after being authenticated.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor

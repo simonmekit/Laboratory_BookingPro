@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface BookingService {
 public List<Booking> findBookingByUserId(long userId);
-public List<Booking> findBookingByLabLocation(long locationId);
 public void createBooking(Booking booking);
 public void createBooking(BookingDto bookingDto, int locationCode);
 public Booking findBookingByDateTime(LocalDateTime dateTime);
@@ -17,4 +16,5 @@ public void deleteBookingByUserId(long userId);
 public void updateBookingById(long bookingId);
 public void updateBookingByUserId(long userId);
 public List<Booking> findAll();
+public Booking findBookingByDescription(String description);
 }
